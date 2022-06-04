@@ -1,0 +1,15 @@
+---
+name: 'SAM Deploy Variables'
+description: 'Determie SAM stack & ENV name based on branch'
+inputs:
+  base-name:
+    description: 'Base name for CFN stack'
+    required: true
+outputs:
+  stack-name:
+    description: 'AWS CloudFormation stack name to deploy'
+  env:
+    description: 'Short form of the environment name'
+runs:
+  using: 'node16'
+  main: 'index.js'
