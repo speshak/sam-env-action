@@ -9,6 +9,9 @@ try {
   // `base-name` input defined in action metadata file
   const baseName = core.getInput('base-name');
   const context = github.context;
+
+  const payload = JSON.stringify(github.context.payload, undefined, 2);
+  console.log(payload)
   console.log(`Ref: ${github.ref}`)
 
   if (context.ref == 'refs/heads/main') {
