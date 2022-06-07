@@ -24,7 +24,7 @@ try {
   else {
     // Pull the last component off the ref
     const parts = context.ref.split('/')
-    const env = parts[parts.length() - 1]
+    const env = parts[parts.length - 1]
 
     core.setOutput("env", env);
     core.setOutput("stack-name", `${baseName}-${env}`);
