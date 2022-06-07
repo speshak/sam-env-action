@@ -15,13 +15,9 @@ const github = __nccwpck_require__(5438);
 try {
   // `base-name` input defined in action metadata file
   const baseName = core.getInput('base-name');
-  const context = github.context;
+  console.log(`Ref: ${github.context.payload.ref}`)
 
-  const payload = JSON.stringify(github.context.payload, undefined, 2);
-  console.log(payload)
-  console.log(`Ref: ${github.ref}`)
-
-  if (context.ref == 'refs/heads/main') {
+  if (github.context.payload.ref == 'refs/heads/main') {
     console.log("Production branch")
     core.setOutput("env", 'Prod');
     core.setOutput("stack-name", baseName);
@@ -29,7 +25,7 @@ try {
   else {
     console.log("Non-prod branch")
     // Pull the last component off the ref
-    const parts = context.ref.split('/')
+    const parts = github.context.payload.ref.split('/')
     const env = parts[parts.length - 1]
 
     core.setOutput("env", env);
