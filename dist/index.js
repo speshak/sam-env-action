@@ -16,12 +16,15 @@ try {
   // `base-name` input defined in action metadata file
   const baseName = core.getInput('base-name');
   const context = github.context;
+  console.log(`Ref: ${github.ref}`)
 
   if (context.ref == 'refs/heads/main') {
+    console.log("Production branch")
     core.setOutput("env", 'Prod');
     core.setOutput("stack-name", baseName);
   }
   else {
+    console.log("Non-prod branch")
     // Pull the last component off the ref
     const parts = context.ref.split('/')
     const env = parts[parts.length - 1]
