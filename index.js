@@ -11,7 +11,10 @@ try {
   console.log(`Ref: ${github.context.payload.ref}`)
 
   if (github.context.payload.ref == 'refs/heads/main') {
-    console.log("Production branch")
+    console.log("Production branch");
+    console.log("env=Prod");
+    console.log(`stack-name=${baseName}`);
+
     core.setOutput("env", 'Prod');
     core.setOutput("stack-name", baseName);
   }
@@ -20,6 +23,9 @@ try {
     // Pull the last component off the ref
     const parts = github.context.payload.ref.split('/')
     const env = parts[parts.length - 1]
+
+    console.log(`env=${env}`);
+    console.log(`stack-name=${baseName}-${env}`);
 
     core.setOutput("env", env);
     core.setOutput("stack-name", `${baseName}-${env}`);
